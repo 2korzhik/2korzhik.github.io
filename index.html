@@ -16,7 +16,7 @@
   function cam(num) {
       var img = new Image(),
           x = document.getElementById("cam"+num);
-      if (stop) {
+      if (window['stop'+num]) {
           return;
       }
 
@@ -28,12 +28,14 @@
       img.src = "http://west-tarhankut.dlinkddns.com:8"+num+"/images/logo.gif" + "?" + (+new Date());    
   }
 </script>
+<center>
+<img id="cam1" src="http://west-tarhankut.dlinkddns.com:81/images/logo.gif" width="640" height="368" border="0" /><br/>
+<button type="button" id="btnStartLive" onclick="stop1=false; cam(1);">Первый пошел!</button>
+<button type="button" id="btnStartLive" onclick="stop1=true">Хватит</button><br/><br/>
 
-<img id="cam1" src="http://west-tarhankut.dlinkddns.com:81/images/logo.gif" width="640" height="368" border="0" />
-<img id="cam2" src="http://west-tarhankut.dlinkddns.com:82/images/logo.gif" width="640" height="368" border="0" /><br>
-
-<button type="button" id="btnStartLive" onclick="stop=false; cam(1);cam(2);">Огонь по батареям</button>
-<button type="button" id="btnStartLive" onclick="stop=true">Хватит</button>
-
+<img id="cam2" src="http://west-tarhankut.dlinkddns.com:82/images/logo.gif" width="640" height="368" border="0" /><br/>
+<button type="button" id="btnStartLive" onclick="stop2=false; cam(2);">Второй пошел!</button>
+<button type="button" id="btnStartLive" onclick="stop2=true">Хватит</button><br/><br/>
+</center>
 </body>
 </html>
