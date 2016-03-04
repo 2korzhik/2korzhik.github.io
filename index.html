@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		img {
+		 	cursor: crosshair; 
+			border: medium;
+			border: thick;
+		}
+	</style>
+</head>
+<body>
+<script>
+  function cam(num) {
+      var img = new Image(),
+          x = document.getElementById("cam"+num);
+      if (stop) {
+          return;
+      }
+
+      img.onload = function() {
+          x.src = img.src;
+          cam(num);
+      };
+
+      img.src = "http://west-tarhankut.dlinkddns.com:8"+num+"/images/logo.gif" + "?" + (+new Date());    
+  }
+</script>
+
+<img id="cam1" width="640" height="368" border="0" />
+<img id="cam2" width="640" height="368" border="0" /><br>
+
+<button type="button" id="btnStartLive" onclick="stop=false; cam(1);cam(2);">Огонь по батареям</button>
+<button type="button" id="btnStartLive" onclick="stop=true">Хватит</button>
+
+</body>
+</html>
