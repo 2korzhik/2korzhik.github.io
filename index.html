@@ -1,47 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title></title>
-	<style>
-		img {
-		 	cursor: crosshair; 
-			border: medium;
-			border: thick;
-		}
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        img {
+            cursor: crosshair;
+            border: medium;
+            border: thick;
+        }
+
         #cam1 {
             background-image: url('http://west-tarhankut.dlinkddns.com:81/images/logo.gif');
         }
+
         #cam2 {
             background-image: url('http://west-tarhankut.dlinkddns.com:82/images/logo.gif');
         }
-	</style>
+    </style>
 </head>
 <body>
 <script>
-  function cam(num) {
-      var img = new Image(),
-          x = document.getElementById("cam"+num);
-      if (window['stop'+num]) {
-          return;
-      }
+    var cam1fps = 0,
+        cam2fps = 0,
+        fp1 = 0,
+        fp2 = 0;
 
-      img.onload = function() {
-          x.src = img.src;
-          cam(num);
-      };
+    function cam(num) {
+        var img = new Image(),
+            x = document.getElementById("cam" + num),
+            fps = document.getElementById("cam" + num + "fps");
+        if (window['stop' + num]) {
+            return;
+        }
 
-      img.src = "http://west-tarhankut.dlinkddns.com:8"+num+"/images/logo.gif" + "?" + (+new Date());
-  }
+        img.onload = function () {
+            x.src = img.src;
+            window['fp' + num]++;
+            fps.innerHTML = window['fp' + num];
+            cam(num);
+        };
+
+        img.src = "http://west-tarhankut.dlinkddns.com:8" + num + "/images/logo.gif" + "?" + (+new Date());
+    }
 </script>
-<center>
-<img id="cam1" src="http://west-tarhankut.dlinkddns.com:81/images/logo.gif" width="640" height="368" border="0" /><br/>
-<button type="button" id="btnStartLive" onclick="stop1=false; cam(1);">Первый пошел!</button>
-<button type="button" id="btnStartLive" onclick="stop1=true">Хватит</button><br/><br/>
+<div align="center">
+    <img id="cam1" src="http://west-tarhankut.dlinkddns.com:81/images/logo.gif" width="640" height="368"
+         border="0"/><br/>
+    <button type="button" id="btnStartLive" onclick="stop1=false; cam(1);">Первый пошел!</button>
+    <button type="button" id="btnStartLive" onclick="stop1=true">Хватит</button>
+    frames: <span id="cam1fps">0</span><br><br>
 
-<img id="cam2" src="http://west-tarhankut.dlinkddns.com:82/images/logo.gif" width="640" height="368" border="0" /><br/>
-<button type="button" id="btnStartLive" onclick="stop2=false; cam(2);">Второй пошел!</button>
-<button type="button" id="btnStartLive" onclick="stop2=true">Хватит</button><br/><br/>
-</center>
+
+    <img id="cam2" src="http://west-tarhankut.dlinkddns.com:82/images/logo.gif" width="640" height="368"
+         border="0"/><br/>
+    <button type="button" id="btnStartLive" onclick="stop2=false; cam(2);">Второй пошел!</button>
+    <button type="button" id="btnStartLive" onclick="stop2=true">Хватит</button>
+    frames: <span id="cam2fps">0</span><br><br>
+</div>
 </body>
 </html>
