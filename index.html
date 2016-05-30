@@ -8,6 +8,7 @@
             cursor: crosshair;
             border: medium;
             border: thick;
+            cursor: pointer; cursor: hand;
         }
 
         #cam1 {
@@ -30,13 +31,23 @@
     var cam1fps = 0,
         cam2fps = 0,
         fp1 = 0,
-        fp2 = 0;
+        fp2 = 0,
+        stop1 = 1,
+        stop2 = 1;
 
-    function cam(num) {
-        var img = new Image(),
+    function cam(num, toggle) {
+
+        var toggle = toggle || false,
+            img = new Image(),
             x = document.getElementById("cam" + num),
             fps = document.getElementById("cam" + num + "fps");
+
+        if (toggle) {
+            window['stop' + num] = !window['stop' + num];
+        }
+
         if (window['stop' + num]) {
+            fps.innerHTML = 'stoped';
             return;
         }
 
@@ -48,6 +59,7 @@
         };
 
         img.src = "http://west-tarhankut.dlinkddns.com:8" + num + "/images/logo.gif" + "?" + (+new Date());
+        return false;
     }
 </script>
 <div class="content" align="center">
@@ -55,15 +67,11 @@
     <div><iframe scrolling="no" frameBorder="0" src="http://pogoda.turtella.ru/i/qhyf4/map/#sst,,33.93233146484373,45.20253154660564,8" style="width:640px; height: 480px; border: none;"></iframe></div>
     <div><iframe scrolling="no" frameBorder="0" src="http://pogoda.turtella.ru/i/qhyf4/map/#weather,,34.280903156249984,45.079019252734774,8" style="width:640px; height: 480px; border: none;"></iframe></div>
     <div>
-        <img id="cam1" src="http://west-tarhankut.dlinkddns.com:81/images/logo.gif" width="640" height="368" border="0"/><br/>
-        <button type="button" id="btnStartLive" onclick="stop1=false; cam(1);">Первый пошел!</button>
-        <button type="button" id="btnStartLive" onclick="stop1=true">Хватит</button>
+        <a href="" onclick="cam(1, true); return false;"><img id="cam1" src="http://west-tarhankut.dlinkddns.com:81/images/logo.gif" width="640" height="368" border="0"/></a><br/>
         frames: <span id="cam1fps">0</span><br><br>
     </div>
     <div>
-        <img id="cam2" src="http://west-tarhankut.dlinkddns.com:82/images/logo.gif" width="640" height="368" border="0"/><br/>
-        <button type="button" id="btnStartLive" onclick="stop2=false; cam(2);">Второй пошел!</button>
-        <button type="button" id="btnStartLive" onclick="stop2=true">Хватит</button>
+        <a href="" onclick="cam(2, true); return false;"><img id="cam2" src="http://west-tarhankut.dlinkddns.com:82/images/logo.gif" width="640" height="368" border="0"/></a><br/>
         frames: <span id="cam2fps">0</span><br><br>
     </div>
     <div>
