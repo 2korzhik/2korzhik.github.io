@@ -2,72 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
-    <style>
-        img {
-            cursor: crosshair;
-            border: medium;
-            border: thick;
-            cursor: pointer; cursor: hand;
-        }
+    <title>Температура воды и погода в крыму</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto&subset=cyrillic,latin' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="index.css">
 
-        .content div {
-            /*display: inline-block;*/
-            float: left;
-            margin-left: 5px;
-        }
-    </style>
+    <script src="index.js"></script>
     <script>
         document.write('<style>' +
             '#cam1 { background-image: url("http://west-tarhankut.dlinkddns.com:81/images/logo.gif?' + (+new Date()) + '"); } ' +
             '#cam2 { background-image: url("http://west-tarhankut.dlinkddns.com:82/images/logo.gif?' + (+new Date()) + '"); } ' +
             '</style>');
     </script>
+
 </head>
 <body>
-<script>
-    var cam1fps = 0,
-        cam2fps = 0,
-        fp1 = 0,
-        fp2 = 0,
-        stop1 = 1,
-        stop2 = 1;
-
-    function cam(num, toggle) {
-
-        var toggle = toggle || false,
-            img = new Image(),
-            x = document.getElementById("cam" + num),
-            fps = document.getElementById("cam" + num + "fps");
-
-        if (toggle) {
-            window['stop' + num] = !window['stop' + num];
-        } else {
-            fps.innerHTML = window['fp' + num];
-        }
-
-        if (window['stop' + num]) {
-            fps.innerHTML = 'stoped';
-            return;
-        }
-
-        img.onload = function () {
-            if (img.src) {
-                x.src = img.src;
-            }
-            window['fp' + num]++;
-            fps.innerHTML = window['fp' + num];
-            cam(num);
-        };
-
-        img.src = "http://west-tarhankut.dlinkddns.com:8" + num + "/images/logo.gif" + "?" + (+new Date());
-        return false;
-    }
-</script>
-<div class="content" align="center">
-<!--    <div><a href="https://clck.yandex.ru/redir/dtype=stred/pid=7/cid=1228/*https://pogoda.yandex.ru/okunevka" target="_blank"><img src="http://info.weather.yandex.net/okunevka/1.ru.png?domain=ru" border="0" alt="Яндекс.Погода"/><img width="1" height="1" src="https://clck.yandex.ru/click/dtype=stred/pid=7/cid=1227/*https://img.yandex.ru/i/pix.gif" alt="" border="0"/></a></div>-->
-    <div><iframe scrolling="no" frameBorder="0" src="http://pogoda.turtella.ru/i/qhyf4/map/#sst,,33.93233146484373,45.079019252734774,8" style="width:640px; height: 400px; border: none;"></iframe></div>
-    <div><iframe scrolling="no" frameBorder="0" src="http://pogoda.turtella.ru/i/qhyf4/map/#weather,,33.93233146484373,45.079019252734774,8" style="width:640px; height: 400px; border: none;"></iframe></div>
+<div class="content">
+    <div class="masked"><h1>Температура воды и погода в крыму</h1></div><br clear="all">
     <div>
         <a href="" onclick="cam(1, true); return false;"><img id="cam1" width="640" height="368" border="0"/></a><br/>
         frames: <span id="cam1fps">0</span><br><br>
@@ -76,9 +26,9 @@
         <a href="" onclick="cam(2, true); return false;"><img id="cam2" width="640" height="368" border="0"/></a><br/>
         frames: <span id="cam2fps">0</span><br><br>
     </div>
-    <div>
-        <iframe src="https://embed.windyty.com/?45.360,32.827,7,in:12,message,marker,metric.wind.m/s" width="400" height="300" frameborder="0"></iframe>
-    </div>
+    <div><iframe scrolling="no" frameBorder="0" src="http://pogoda.turtella.ru/i/qhyf4/map/#sst,,33.93233146484373,45.079019252734774,8"></iframe></div>
+    <div><iframe scrolling="no" frameBorder="0" src="http://pogoda.turtella.ru/i/qhyf4/map/#weather,,33.93233146484373,45.079019252734774,8"></iframe></div>
+    <div><iframe src="https://embed.windyty.com/?45.079,33.932,8,in:12,message,marker,metric.wind.m/s"></iframe></div>
 </div>
 </body>
 </html>
